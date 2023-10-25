@@ -1,3 +1,42 @@
+import Category from '../models/category.js'
+
 export const getCategories = async (req, res) => {
-  res.send('Hello from categories')
+  try {
+    const categories = await Category.find({})
+    res.status(200).json({ data: categories })
+  } catch (err) {
+    res.status(500).json({ message: 'Error getting categories' })
+  }
+}
+
+export const createCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body
+    const newCategory = await Category.create({ name, description })
+    res.status(201).json({ message: 'Category added', data: newCategory })
+  } catch (err) {
+    res.status(500).json({ message: 'Error creating category' })
+  }
+}
+
+export const updateCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body
+    const { id } = req.params
+    const data = await Category.findByIdAndUpdate(id, { name, description }, { new: true })
+    res.status(200).json({ message: 'Category updated', data })
+  } catch (err) {
+    res.status(500).json({ message: 'Error updating category' })
+  }
+}
+
+export const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params
+    const data = await Category.findByIdAndDelete(id)
+    if (!data) throw new Error('Category not found')
+    res.status(200).json({ message: 'Category deleted', data })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
 }
