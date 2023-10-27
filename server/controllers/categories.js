@@ -1,4 +1,5 @@
 import Category from '../models/category.js'
+import Book from '../models/book.js'
 
 export const getCategories = async (req, res) => {
   try {
@@ -33,6 +34,8 @@ export const updateCategory = async (req, res) => {
 export const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params
+    const isUsed = await Book.findOne({ category: id })
+    if (isUsed) throw new Error('Category is in use')
     const data = await Category.findByIdAndDelete(id)
     if (!data) throw new Error('Category not found')
     res.status(200).json({ message: 'Category deleted', data })
