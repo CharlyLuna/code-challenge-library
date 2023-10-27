@@ -8,7 +8,7 @@ const User = new mongoose.Schema({
     unique: true,
     match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Email is invalid']
   },
-  hasBorrowed: { type: Boolean, default: false }
+  borrowedBooks: { type: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Book' }] }
 })
 
 const UserSchema = mongoose.model('User', User)
