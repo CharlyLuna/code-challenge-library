@@ -1,0 +1,26 @@
+$primary-color: #373737;
+$accent-color: #ff6b6b;
+
+
+.navbar {
+  background-color: $primary-color;
+  width: 100%;
+  padding: 15px 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 5rem;
+    li > a {
+      font-size: 18px;
+      color: #fff;
+      text-decoration: none;
+      &:hover {
+        color: $accent-color;
+      }
+    }
+  }
+  
+}
