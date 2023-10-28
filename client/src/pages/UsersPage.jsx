@@ -8,7 +8,7 @@ import { isValidEmail, isValidName } from '../utils/validations'
 
 export const UsersPage = () => {
   const { onInputChange, onResetForm, name, email, formState } = useForm({ name: '', email: '' })
-  const { createUser, getUsers, users } = useContext(UsersContext)
+  const { createUser, getUsers, deletUser, users } = useContext(UsersContext)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const UsersPage = () => {
                   <td>{user.borrowedBooks.length > 0 ? 'Yes' : 'No'}</td>
                   <td>
                     <button onClick={() => console.log(user._id)}><EditIcon /></button>
-                    <button onClick={() => console.log(user._id)}><DeleteIcon /></button>
+                    <button onClick={() => deletUser(user._id)}><DeleteIcon /></button>
                   </td>
                 </tr>
               ))

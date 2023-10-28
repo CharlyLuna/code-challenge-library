@@ -25,15 +25,15 @@ export const UsersProvider = ({ children }) => {
       setError(error.message)
       console.error(error)
     }
-    // .then(data => {
-    //   setUsers([...users, data])
-    // })
   }
 
   const getUsers = async () => {
     try {
       const result = await fetch('http://localhost:3001/library/users')
-      if (!result.ok) throw new Error('Error fetching users')
+      if (!result.ok) {
+        const { message } = await result.json()
+        throw new Error(message)
+      }
       const { data } = await result.json()
       console.log(data)
       setUsers(data)
@@ -43,8 +43,25 @@ export const UsersProvider = ({ children }) => {
     }
   }
 
+  const deletUser = async (id) => {
+    try {
+      const result = await fetch(`http://localhost:3001/library/users/${id}`, {
+        method: 'DELETE'
+      })
+      if (!result.ok) {
+        const { message } = await result.json()
+        throw new Error(message)
+      }
+      const newUsers = users.filter(user => user._id !== id)
+      setUsers(newUsers)
+    } catch (error) {
+      setError(error.message)
+      console.error(error)
+    }
+  }
+
   return (
-    <UsersContext.Provider value={{ users, createUser, getUsers, serverError: error }}>
+    <UsersContext.Provider value={{ users, createUser, deletUser, getUsers, serverError: error }}>
       {children}
     </UsersContext.Provider>
   )
