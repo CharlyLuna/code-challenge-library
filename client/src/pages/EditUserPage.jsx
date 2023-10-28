@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UsersContext } from '../context/UsersContext'
@@ -15,11 +15,6 @@ export const EditUserPage = () => {
     name: user.name,
     email: user.email
   })
-
-  useEffect(() => {
-    console.log(user)
-    console.log(formState)
-  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
