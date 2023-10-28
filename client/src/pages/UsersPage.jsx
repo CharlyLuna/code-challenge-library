@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from 'react'
 import { DeleteIcon } from '../components/DeleteIcon'
 import { EditIcon } from '../components/EditIcon'
-import { useForm } from '../context/useForm'
+import { useForm } from '../hooks/useForm'
 import { UsersContext } from '../context/UsersContext'
 import './UsersPage.scss'
 import { isValidEmail, isValidName } from '../utils/validations'
+import { useNavigate } from 'react-router-dom'
 
 export const UsersPage = () => {
   const { onInputChange, onResetForm, name, email, formState } = useForm({ name: '', email: '' })
   const { createUser, getUsers, deletUser, users } = useContext(UsersContext)
   const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getUsers()
@@ -46,7 +48,7 @@ export const UsersPage = () => {
                   <td>{user.email}</td>
                   <td>{user.borrowedBooks.length > 0 ? 'Yes' : 'No'}</td>
                   <td>
-                    <button onClick={() => console.log(user._id)}><EditIcon /></button>
+                    <button onClick={() => navigate(`/users/${user._id}`)}><EditIcon /></button>
                     <button onClick={() => deletUser(user._id)}><DeleteIcon /></button>
                   </td>
                 </tr>
