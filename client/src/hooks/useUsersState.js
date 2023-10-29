@@ -33,7 +33,6 @@ export const useUsersState = () => {
         throw new Error(message)
       }
       const { data } = await result.json()
-      console.log(data)
       setUsers(data)
     } catch (error) {
       setError(error.message)

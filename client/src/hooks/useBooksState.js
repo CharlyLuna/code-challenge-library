@@ -1,75 +1,75 @@
 import { useState } from 'react'
 
-export const useCategoriesState = () => {
-  const [categories, setCategories] = useState([])
+export const useBooksState = () => {
+  const [books, setBooks] = useState([])
   const [error, setError] = useState(null)
 
-  const createCategory = async (category) => {
+  const createBook = async (book) => {
     try {
-      const result = await fetch('http://localhost:3001/library/categories', {
+      const result = await fetch('http://localhost:3001/library/books', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(category)
+        body: JSON.stringify(book)
       })
       if (!result.ok) {
         const { message } = await result.json()
         throw new Error(message)
       }
       const { data } = await result.json()
-      setCategories([...categories, data])
+      setBooks([...books, data])
     } catch (error) {
       setError(error.message)
       console.error(error)
     }
   }
 
-  const getCategories = async () => {
+  const getBooks = async () => {
     try {
-      const result = await fetch('http://localhost:3001/library/categories')
+      const result = await fetch('http://localhost:3001/library/books')
       if (!result.ok) {
         const { message } = await result.json()
         throw new Error(message)
       }
       const { data } = await result.json()
-      setCategories(data)
+      setBooks(data)
+      console.log('get books')
     } catch (error) {
       setError(error.message)
       console.error(error)
     }
   }
 
-  const deleteCategory = async (id) => {
+  const deleteBook = async (id) => {
     try {
-      const result = await fetch(`http://localhost:3001/library/categories/${id}`, {
+      const result = await fetch(`http://localhost:3001/library/books/${id}`, {
         method: 'DELETE'
       })
       if (!result.ok) {
         const { message } = await result.json()
         throw new Error(message)
       }
-      const newCategories = categories.filter(category => category._id !== id)
-      setCategories(newCategories)
+      const newBooks = books.filter(book => book._id !== id)
+      setBooks(newBooks)
     } catch (error) {
       setError(error.message)
       console.error(error)
     }
   }
 
-  const getCategoryById = (id) => {
-    console.log('getting category by id')
-    return categories.find(category => category._id === id)
+  const getBookById = (id) => {
+    return books.find(book => book._id === id)
   }
 
-  const updateCategory = async (id, category) => {
+  const updateBook = async (id, book) => {
     try {
-      const result = await fetch(`http://localhost:3001/library/categories/${id}`, {
+      const result = await fetch(`http://localhost:3001/library/books/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(category)
+        body: JSON.stringify(book)
       })
       if (!result.ok) {
         const { message } = await result.json()
@@ -84,12 +84,12 @@ export const useCategoriesState = () => {
   }
 
   return {
-    categories,
-    createCategory,
-    deleteCategory,
-    getCategoryById,
-    updateCategory,
-    getCategories,
+    books,
+    createBook,
+    deleteBook,
+    getBookById,
+    updateBook,
+    getBooks,
     error
   }
 }
