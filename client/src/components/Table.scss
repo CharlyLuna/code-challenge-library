@@ -1,0 +1,33 @@
+
+.wrapper {
+  width: min(1100px, 100%);
+  margin-inline: auto;
+  min-height: 420px;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.items-table {
+  place-self: center;
+  background-color: var(--primary-color);
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    background-color: var(--accent-color);
+    padding: var(--spacing);
+    text-align: left;
+  }
+  td {
+    padding: var(--spacing);
+  }
+  button {
+    width: fit-content;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+}

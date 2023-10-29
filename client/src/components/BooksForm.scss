@@ -1,0 +1,16 @@
+
+.check-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  .check {
+    display: flex;
+    place-items: center;
+    gap: 5px;
+    input {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

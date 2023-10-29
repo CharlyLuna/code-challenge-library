@@ -1,11 +1,8 @@
-$primary-color: #373737;
-$accent-color: #ff6b6b;
-
 
 .navbar {
-  background-color: $primary-color;
+  background-color: var(--primary-color);
   width: 100%;
-  padding: 15px 0;
+  padding: var(--spacing) 0;
   ul {
     margin: 0;
     padding: 0;
@@ -18,7 +15,7 @@ $accent-color: #ff6b6b;
       color: #fff;
       text-decoration: none;
       &:hover {
-        color: $accent-color;
+        color: var(--accent-color);
       }
     }
   }

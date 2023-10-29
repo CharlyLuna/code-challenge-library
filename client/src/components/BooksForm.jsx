@@ -4,12 +4,11 @@ import { isValidName } from '../utils/validations'
 import { formatDate } from '../utils/functions'
 import { CategoriesContext } from '../context/CategoriesContext'
 import { UsersContext } from '../context/UsersContext'
-import { BooksContext } from '../context/BooksContext'
+import './BooksForm.scss'
 
 export const BooksForm = ({ initialState, onSubmit, navigate, action }) => {
   const { getCategories, categories } = useContext(CategoriesContext)
   const { getUsers, users } = useContext(UsersContext)
-  const { getBooks } = useContext(BooksContext)
   const [error, setError] = useState(null)
   const { onInputChange, onResetForm, name, author, publicationDate, formState, category, user } = useForm(initialState)
 
@@ -34,7 +33,6 @@ export const BooksForm = ({ initialState, onSubmit, navigate, action }) => {
       onSubmit({ ...formState, category: categories })
     }
     onResetForm()
-    // getBooks()
 
     if (navigate) navigate()
   }
@@ -44,36 +42,38 @@ export const BooksForm = ({ initialState, onSubmit, navigate, action }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='model-form'>
-      <h2>{action} Book</h2>
-      <label htmlFor='name'>Name</label>
-      <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
-      <label htmlFor='author'>Author</label>
-      <input type='text' id='author' name='author' value={author} required onChange={onInputChange} />
-      <label htmlFor='publicationDate'>Publication date</label>
-      <input type='date' id='publicationDate' name='publicationDate' value={formatDate(publicationDate)} required onChange={onInputChange} />
-      <label htmlFor='category'>Category</label>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-        {
+    <div className='form-wrapper'>
+      <form onSubmit={handleSubmit} className='model-form'>
+        <h2>{action} Book</h2>
+        <label htmlFor='name'>Name</label>
+        <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
+        <label htmlFor='author'>Author</label>
+        <input type='text' id='author' name='author' value={author} required onChange={onInputChange} />
+        <label htmlFor='publicationDate'>Publication date</label>
+        <input type='date' id='publicationDate' name='publicationDate' value={formatDate(publicationDate)} required onChange={onInputChange} />
+        <label htmlFor='category'>Category</label>
+        <div className='check-selection'>
+          {
         categories.map(category => (
-          <div key={category._id}>
+          <div className='check' key={category._id}>
             <input type='checkbox' id='category' name='category' value={category._id} defaultChecked={checkCategory(category._id)} />
             <label htmlFor={category._id}>{category.name}</label>
           </div>
         ))
       }
-      </div>
-      <label htmlFor='user'>User</label>
-      <select name='user' id='user' onChange={onInputChange} defaultValue={user ?? ''}>
-        <option value=''>Select an option</option>
-        {
+        </div>
+        <label htmlFor='user'>User</label>
+        <select name='user' id='user' onChange={onInputChange} defaultValue={user ?? ''}>
+          <option value=''>Select an option</option>
+          {
           users.map(user => (
             <option key={user._id} value={user._id}>{user.name}</option>
           ))
         }
-      </select>
-      <button type='submit'>{action}</button>
-      {error && <p className='error'>{error}</p>}
-    </form>
+        </select>
+        <button type='submit'>{action}</button>
+        {error && <p className='error'>{error}</p>}
+      </form>
+    </div>
   )
 }

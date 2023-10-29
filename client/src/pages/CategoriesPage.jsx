@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { CategoriesForm } from '../components/CategoriesForm'
 import { usePagination } from '../hooks/usePagination'
 import { Pagination } from '../components/Pagination'
+import { Table } from '../components/Table'
 
 const initialState = {
   name: '',
@@ -24,19 +25,9 @@ export const CategoriesPage = () => {
   const onSubmit = (form) => createCategory(form)
 
   return (
-    <>
-      <main>
-        <h1>Categories</h1>
-        <table className='categories-table'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
+    <main>
+      <Table title='Categories' headings={['Name', 'Description', 'Actions']}>
+        {
               ItemsToDisplay.map(category => (
                 <tr key={category._id}>
                   <td>{category.name}</td>
@@ -48,13 +39,11 @@ export const CategoriesPage = () => {
                 </tr>
               ))
             }
-          </tbody>
-        </table>
+      </Table>
 
-        <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
+      <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
 
-        <CategoriesForm onSubmit={onSubmit} action='Create' initialState={initialState} />
-      </main>
-    </>
+      <CategoriesForm onSubmit={onSubmit} action='Create' initialState={initialState} />
+    </main>
   )
 }

@@ -7,6 +7,7 @@ import { BooksForm } from '../components/BooksForm'
 import { formatCategories, formatReadableDate } from '../utils/functions'
 import { Pagination } from '../components/Pagination'
 import { usePagination } from '../hooks/usePagination'
+import { Table } from '../components/Table'
 
 const initialState = {
   name: '',
@@ -28,39 +29,25 @@ export const BooksPage = () => {
   const onSubmit = (form) => createBook(form)
 
   return (
-    <main className='users-page'>
-      <h1>Books</h1>
-      <table className='users-table'>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Author</th>
-            <th>Category</th>
-            <th>Publication date</th>
-            <th>User</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            ItemsToDisplay.map(book => (
-              <tr key={book._id}>
-                <td>{book.name}</td>
-                <td>{book.author}</td>
-                <td>{formatCategories(book.category)}</td>
-                <td>{formatReadableDate(book.publicationDate)}</td>
-                <td>{book.user?.name ?? 'No user'}</td>
-                <td>
-                  <button onClick={() => navigate(`/books/${book._id}`)}><EditIcon /></button>
-                  <button onClick={() => deleteBook(book._id)}><DeleteIcon /></button>
-                </td>
-              </tr>
-            ))
-            }
-        </tbody>
-      </table>
+    <main>
+      <Table title='Books' headings={['Name', 'Author', 'Category', 'Publication date', 'User', 'Actions']}>
+        {
+          ItemsToDisplay.map(book => (
+            <tr key={book._id}>
+              <td>{book.name}</td>
+              <td>{book.author}</td>
+              <td>{formatCategories(book.category)}</td>
+              <td>{formatReadableDate(book.publicationDate)}</td>
+              <td>{book.user?.name ?? 'No user'}</td>
+              <td>
+                <button onClick={() => navigate(`/books/${book._id}`)}><EditIcon /></button>
+                <button onClick={() => deleteBook(book._id)}><DeleteIcon /></button>
+              </td>
+            </tr>
+          ))
+        }
+      </Table>
       <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
-
       <BooksForm initialState={initialState} onSubmit={onSubmit} action='Create' />
     </main>
   )

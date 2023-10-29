@@ -18,14 +18,16 @@ export const CategoriesForm = ({ initialState, onSubmit, action, navigate }) => 
   }
 
   return (
-    <form onSubmit={handleSubmit} className='model-form'>
-      <h2>{action} category</h2>
-      <label htmlFor='name'>Name</label>
-      <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
-      <label htmlFor='description'>Description</label>
-      <input type='text' id='description' name='description' value={description} required onChange={onInputChange} />
-      <button type='submit'>{action}</button>
-      {error && <p className='error'>{error}</p>}
-    </form>
+    <div className='form-wrapper'>
+      <form onSubmit={handleSubmit} className='model-form'>
+        <h2>{action} category</h2>
+        <label htmlFor='name'>Name</label>
+        <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
+        <label htmlFor='description'>Description</label>
+        <input type='text' id='description' name='description' value={description} required onChange={onInputChange} />
+        <button type='submit'>{action}</button>
+        {error && <p className='error'>{error}</p>}
+      </form>
+    </div>
   )
 }

@@ -18,14 +18,16 @@ export const UsersForm = ({ onSubmit, navigate, initialState, action }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='model-form'>
-      <h2>{action} User</h2>
-      <label htmlFor='name'>Name</label>
-      <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
-      <label htmlFor='email'>Email</label>
-      <input type='email' id='email' name='email' value={email} required onChange={onInputChange} />
-      <button type='submit'>{action}</button>
-      {error && <p className='error'>{error}</p>}
-    </form>
+    <div className='form-wrapper'>
+      <form onSubmit={handleSubmit} className='model-form'>
+        <h2>{action} User</h2>
+        <label htmlFor='name'>Name</label>
+        <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
+        <label htmlFor='email'>Email</label>
+        <input type='email' id='email' name='email' value={email} required onChange={onInputChange} />
+        <button type='submit'>{action}</button>
+        {error && <p className='error'>{error}</p>}
+      </form>
+    </div>
   )
 }
