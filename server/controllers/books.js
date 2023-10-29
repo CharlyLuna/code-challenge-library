@@ -45,7 +45,7 @@ export const deleteBook = async (req, res) => {
   try {
     const { id } = req.params
     const { user } = await Book.findById(id)
-    if (user) throw new Error('Can not delete, book is borrowed')
+    if (user) throw new Error('Can not delete: book is borrowed')
     const data = await Book.findByIdAndDelete(id)
     if (!data) throw new Error('Book not found')
     res.status(200).json({ message: 'Book deleted', data })

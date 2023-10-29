@@ -35,7 +35,7 @@ export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params
     const hasBorrowed = await Book.findOne({ user: id })
-    if (hasBorrowed) throw new Error('User has borrowed a book')
+    if (hasBorrowed) throw new Error('Can not delete: user has borrowed a book')
     const data = await User.findByIdAndDelete(id)
     if (!data) throw new Error('User not found')
     res.status(200).json({ message: 'User deleted', data })
