@@ -20,7 +20,7 @@ export const createBook = async (req, res) => {
     res.status(201).json({ message: 'Book added', data })
   } catch (err) {
     console.log(err)
-    res.status(500).json({ message: 'Error creating book' })
+    res.status(500).json({ message: 'Error creating book: The name should be unique and values need to be valid' })
   }
 }
 
@@ -37,7 +37,7 @@ export const updateBook = async (req, res) => {
     res.status(200).json({ message: 'Book updated', data })
   } catch (err) {
     console.log(err)
-    res.status(500).json({ message: 'Error updating book' })
+    res.status(500).json({ message: 'Error updating book: The name should be unique and values need to be valid' })
   }
 }
 

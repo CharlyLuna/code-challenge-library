@@ -16,7 +16,7 @@ export const createCategory = async (req, res) => {
     const newCategory = await Category.create({ name, description })
     res.status(201).json({ message: 'Category added', data: newCategory })
   } catch (err) {
-    res.status(500).json({ message: 'Error creating category' })
+    res.status(500).json({ message: 'Error creating category: The name should be unique and values need to be valid' })
   }
 }
 
@@ -27,7 +27,7 @@ export const updateCategory = async (req, res) => {
     const data = await Category.findByIdAndUpdate(id, { name, description }, { new: true })
     res.status(200).json({ message: 'Category updated', data })
   } catch (err) {
-    res.status(500).json({ message: 'Error updating category' })
+    res.status(500).json({ message: 'Error updating category: The name should be unique and values need to be valid' })
   }
 }
 

@@ -16,7 +16,7 @@ export const createUser = async (req, res) => {
     const newUser = await User.create({ name, email, hasBorrowed })
     res.status(201).json({ message: 'User added', data: newUser })
   } catch (err) {
-    res.status(500).json({ message: 'Error creating user' })
+    res.status(500).json({ message: 'Error creating user: The email should be unique and values need to be valid' })
   }
 }
 
@@ -27,7 +27,7 @@ export const updateUser = async (req, res) => {
     const data = await User.findByIdAndUpdate(id, { name, email }, { new: true })
     res.status(200).json({ message: 'User updated', data })
   } catch (err) {
-    res.status(500).json({ message: 'Error updating user' })
+    res.status(500).json({ message: 'Error updating user: The email should be unique and values need to be valid' })
   }
 }
 
