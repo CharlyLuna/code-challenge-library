@@ -1,31 +1,25 @@
-import { useContext, useEffect, useState } from 'react'
-import { DeleteIcon } from '../components/DeleteIcon'
-import { EditIcon } from '../components/EditIcon'
-import { useForm } from '../hooks/useForm'
+import { useContext, useEffect } from 'react'
+import { DeleteIcon } from '../components/icons/DeleteIcon'
+import { EditIcon } from '../components/icons/EditIcon'
 import { UsersContext } from '../context/UsersContext'
 import './UsersPage.scss'
-import { isValidEmail, isValidName } from '../utils/validations'
 import { useNavigate } from 'react-router-dom'
+import { UsersForm } from '../components/UsersForm'
+
+const initialState = {
+  name: '',
+  email: ''
+}
 
 export const UsersPage = () => {
-  const { onInputChange, onResetForm, name, email, formState } = useForm({ name: '', email: '' })
   const { createUser, getUsers, deletUser, users } = useContext(UsersContext)
-  const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     getUsers()
   }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setError(null)
-    if (!isValidName(name) || !isValidEmail(email)) {
-      return setError('Invalid name or email')
-    }
-    createUser(formState)
-    onResetForm()
-  }
+  const onSubmit = (form) => createUser(form)
 
   return (
     <>
@@ -57,15 +51,7 @@ export const UsersPage = () => {
           </tbody>
         </table>
 
-        <form onSubmit={handleSubmit} className='creation-form'>
-          <h2>Create new user</h2>
-          <label htmlFor='name'>Name</label>
-          <input type='text' id='name' name='name' value={name} required onChange={onInputChange} />
-          <label htmlFor='email'>Email</label>
-          <input type='email' id='email' name='email' value={email} required onChange={onInputChange} />
-          <button type='submit'>Crear</button>
-          {error && <p className='error'>{error}</p>}
-        </form>
+        <UsersForm initialState={initialState} onSubmit={onSubmit} action='Create' />
       </main>
     </>
   )
