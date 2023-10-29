@@ -6,6 +6,7 @@ export const useBooksState = () => {
 
   const createBook = async (book) => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/books', {
         method: 'POST',
         headers: {
@@ -27,6 +28,7 @@ export const useBooksState = () => {
 
   const getBooks = async () => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/books')
       if (!result.ok) {
         const { message } = await result.json()
@@ -43,6 +45,7 @@ export const useBooksState = () => {
 
   const deleteBook = async (id) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/books/${id}`, {
         method: 'DELETE'
       })
@@ -64,6 +67,7 @@ export const useBooksState = () => {
 
   const updateBook = async (id, book) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/books/${id}`, {
         method: 'PATCH',
         headers: {

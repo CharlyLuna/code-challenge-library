@@ -17,6 +17,18 @@ main {
   margin: 0 auto;
 }
 
+//Mixins
+@mixin button {
+  height: $vertical-spacing;
+  font-size: 16px;
+  background-color: $accent-color;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+// Global styles
 .icon {
   width: 25px;
   height: 25px;
@@ -46,12 +58,6 @@ main {
     font-size: 16px;
   }
   button {
-    height: $vertical-spacing;
-    font-size: 16px;
-    background-color: $accent-color;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+    @include button;
   }
 }

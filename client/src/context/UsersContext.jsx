@@ -7,7 +7,7 @@ export const UsersProvider = ({ children }) => {
   const { createUser, deletUser, getUsers, getUserById, updateUser, users, error } = useUsersState()
 
   return (
-    <UsersContext.Provider value={{ users, createUser, deletUser, getUserById, updateUser, getUsers, serverError: error }}>
+    <UsersContext.Provider value={{ users, createUser, deletUser, getUserById, updateUser, getUsers, error }}>
       {children}
     </UsersContext.Provider>
   )

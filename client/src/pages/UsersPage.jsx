@@ -7,6 +7,7 @@ import { UsersForm } from '../components/UsersForm'
 import { usePagination } from '../hooks/usePagination'
 import { Pagination } from '../components/Pagination'
 import { Table } from '../components/Table'
+import { Modal } from '../components/Modal'
 
 const initialState = {
   name: '',
@@ -14,7 +15,7 @@ const initialState = {
 }
 
 export const UsersPage = () => {
-  const { createUser, getUsers, deletUser, users } = useContext(UsersContext)
+  const { createUser, getUsers, deletUser, users, error } = useContext(UsersContext)
   const navigate = useNavigate()
   const { ItemsToDisplay, currentPage, itemsPerPage, paginate, totalItems } = usePagination({ items: users })
 
@@ -41,9 +42,8 @@ export const UsersPage = () => {
           ))
         }
       </Table>
-
+      <Modal error={error} />
       <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
-
       <UsersForm initialState={initialState} onSubmit={onSubmit} action='Create' />
     </main>
   )

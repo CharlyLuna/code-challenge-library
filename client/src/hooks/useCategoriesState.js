@@ -6,6 +6,7 @@ export const useCategoriesState = () => {
 
   const createCategory = async (category) => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/categories', {
         method: 'POST',
         headers: {
@@ -27,6 +28,7 @@ export const useCategoriesState = () => {
 
   const getCategories = async () => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/categories')
       if (!result.ok) {
         const { message } = await result.json()
@@ -42,6 +44,7 @@ export const useCategoriesState = () => {
 
   const deleteCategory = async (id) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/categories/${id}`, {
         method: 'DELETE'
       })
@@ -64,6 +67,7 @@ export const useCategoriesState = () => {
 
   const updateCategory = async (id, category) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/categories/${id}`, {
         method: 'PATCH',
         headers: {

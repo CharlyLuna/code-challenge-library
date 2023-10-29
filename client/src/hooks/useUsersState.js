@@ -6,6 +6,7 @@ export const useUsersState = () => {
 
   const createUser = async (user) => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/users', {
         method: 'POST',
         headers: {
@@ -27,6 +28,7 @@ export const useUsersState = () => {
 
   const getUsers = async () => {
     try {
+      setError(null)
       const result = await fetch('http://localhost:3001/library/users')
       if (!result.ok) {
         const { message } = await result.json()
@@ -42,6 +44,7 @@ export const useUsersState = () => {
 
   const deletUser = async (id) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/users/${id}`, {
         method: 'DELETE'
       })
@@ -64,6 +67,7 @@ export const useUsersState = () => {
 
   const updateUser = async (id, user) => {
     try {
+      setError(null)
       const result = await fetch(`http://localhost:3001/library/users/${id}`, {
         method: 'PATCH',
         headers: {

@@ -7,6 +7,7 @@ import { CategoriesForm } from '../components/CategoriesForm'
 import { usePagination } from '../hooks/usePagination'
 import { Pagination } from '../components/Pagination'
 import { Table } from '../components/Table'
+import { Modal } from '../components/Modal'
 
 const initialState = {
   name: '',
@@ -14,13 +15,15 @@ const initialState = {
 }
 
 export const CategoriesPage = () => {
-  const { getCategories, createCategory, deleteCategory, categories } = useContext(CategoriesContext)
+  const { getCategories, createCategory, deleteCategory, categories, error } = useContext(CategoriesContext)
   const navigate = useNavigate()
   const { ItemsToDisplay, currentPage, itemsPerPage, paginate, totalItems } = usePagination({ items: categories })
 
   useEffect(() => {
     getCategories()
   }, [])
+
+  console.log('error', error)
 
   const onSubmit = (form) => createCategory(form)
 
@@ -40,9 +43,8 @@ export const CategoriesPage = () => {
               ))
             }
       </Table>
-
+      <Modal error={error} />
       <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
-
       <CategoriesForm onSubmit={onSubmit} action='Create' initialState={initialState} />
     </main>
   )
