@@ -10,7 +10,7 @@ export const CategoriesForm = ({ initialState, onSubmit, action, navigate }) => 
     e.preventDefault()
     setError(null)
     if (!isValidName(name)) {
-      return setError('Invalid values')
+      return setError('The values are invalid')
     }
     onSubmit(formState)
     onResetForm()

@@ -10,7 +10,7 @@ export const UsersForm = ({ onSubmit, navigate, initialState, action }) => {
     e.preventDefault()
     setError(null)
     if (!isValidName(name) || !isValidEmail(email)) {
-      return setError('Invalid values')
+      return setError('The values are invalid')
     }
     onSubmit(formState)
     onResetForm()

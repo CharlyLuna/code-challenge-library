@@ -24,7 +24,7 @@ export const BooksForm = ({ initialState, onSubmit, navigate, action }) => {
     const categories = formData.getAll('category')
     setError(null)
     if (!isValidName(name) || !isValidName(author) || !publicationDate || categories.length < 1) {
-      return setError('Invalid values')
+      return setError('The values are invalid')
     }
 
     if (user === '') {
