@@ -5,6 +5,8 @@ import { UsersContext } from '../context/UsersContext'
 import './UsersPage.scss'
 import { useNavigate } from 'react-router-dom'
 import { UsersForm } from '../components/UsersForm'
+import { usePagination } from '../hooks/usePagination'
+import { Pagination } from '../components/Pagination'
 
 const initialState = {
   name: '',
@@ -14,6 +16,7 @@ const initialState = {
 export const UsersPage = () => {
   const { createUser, getUsers, deletUser, users } = useContext(UsersContext)
   const navigate = useNavigate()
+  const { ItemsToDisplay, currentPage, itemsPerPage, paginate, totalItems } = usePagination({ items: users })
 
   useEffect(() => {
     getUsers()
@@ -36,7 +39,7 @@ export const UsersPage = () => {
           </thead>
           <tbody>
             {
-              users.map(user => (
+              ItemsToDisplay.map(user => (
                 <tr key={user._id}>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
@@ -50,6 +53,7 @@ export const UsersPage = () => {
             }
           </tbody>
         </table>
+        <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
 
         <UsersForm initialState={initialState} onSubmit={onSubmit} action='Create' />
       </main>

@@ -4,6 +4,8 @@ import { DeleteIcon } from '../components/icons/DeleteIcon'
 import { CategoriesContext } from '../context/CategoriesContext'
 import { useNavigate } from 'react-router-dom'
 import { CategoriesForm } from '../components/CategoriesForm'
+import { usePagination } from '../hooks/usePagination'
+import { Pagination } from '../components/Pagination'
 
 const initialState = {
   name: '',
@@ -13,6 +15,7 @@ const initialState = {
 export const CategoriesPage = () => {
   const { getCategories, createCategory, deleteCategory, categories } = useContext(CategoriesContext)
   const navigate = useNavigate()
+  const { ItemsToDisplay, currentPage, itemsPerPage, paginate, totalItems } = usePagination({ items: categories })
 
   useEffect(() => {
     getCategories()
@@ -34,7 +37,7 @@ export const CategoriesPage = () => {
           </thead>
           <tbody>
             {
-              categories.map(category => (
+              ItemsToDisplay.map(category => (
                 <tr key={category._id}>
                   <td>{category.name}</td>
                   <td>{category.description}</td>
@@ -47,6 +50,8 @@ export const CategoriesPage = () => {
             }
           </tbody>
         </table>
+
+        <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} paginate={paginate} totalItems={totalItems} />
 
         <CategoriesForm onSubmit={onSubmit} action='Create' initialState={initialState} />
       </main>

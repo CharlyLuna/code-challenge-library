@@ -1,0 +1,33 @@
+$accent-color: #ff6b6b;
+$text-color: #fff;
+$spacing: 10px;
+
+.pagination-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: $spacing;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: $text-color;
+}
+
+.pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: $spacing;
+  li > button {
+    padding: 5px 15px;
+    background-color: $accent-color;
+    border: none;
+    border-radius: 5px;
+    color: $text-color;
+    cursor: pointer;
+  }
+}
