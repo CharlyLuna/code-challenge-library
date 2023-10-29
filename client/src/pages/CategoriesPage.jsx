@@ -23,8 +23,6 @@ export const CategoriesPage = () => {
     getCategories()
   }, [])
 
-  console.log('error', error)
-
   const onSubmit = (form) => createCategory(form)
 
   return (

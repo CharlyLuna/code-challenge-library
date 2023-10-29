@@ -8,8 +8,6 @@ export const Modal = ({ error }) => {
     error ? setShowModal(true) : setShowModal(false)
   }, [error])
 
-  console.log(showModal)
-
   return (
     <div className={`modal ${showModal ? 'visible' : 'invisible'}`}>
       <p>{error}</p>

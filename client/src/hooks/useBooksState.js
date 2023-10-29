@@ -36,7 +36,6 @@ export const useBooksState = () => {
       }
       const { data } = await result.json()
       setBooks(data)
-      console.log('get books')
     } catch (error) {
       setError(error.message)
       console.error(error)
@@ -79,8 +78,6 @@ export const useBooksState = () => {
         const { message } = await result.json()
         throw new Error(message)
       }
-      const { data } = await result.json()
-      console.log(data)
     } catch (err) {
       setError(err.message)
       console.error(err)

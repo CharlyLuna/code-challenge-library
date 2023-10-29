@@ -1,4 +1,3 @@
-import './App.scss'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { UsersProvider } from './context/UsersContext'
 import { UsersPage } from './pages/UsersPage'

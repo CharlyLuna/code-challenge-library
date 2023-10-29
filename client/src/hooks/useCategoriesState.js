@@ -61,7 +61,6 @@ export const useCategoriesState = () => {
   }
 
   const getCategoryById = (id) => {
-    console.log('getting category by id')
     return categories.find(category => category._id === id)
   }
 
@@ -79,8 +78,6 @@ export const useCategoriesState = () => {
         const { message } = await result.json()
         throw new Error(message)
       }
-      const { data } = await result.json()
-      console.log(data)
     } catch (err) {
       setError(err.message)
       console.error(err)

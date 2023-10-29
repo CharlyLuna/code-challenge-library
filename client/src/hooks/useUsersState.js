@@ -61,7 +61,6 @@ export const useUsersState = () => {
   }
 
   const getUserById = (id) => {
-    console.log('getting user by id')
     return users.find(user => user._id === id)
   }
 
@@ -79,8 +78,6 @@ export const useUsersState = () => {
         const { message } = await result.json()
         throw new Error(message)
       }
-      const { data } = await result.json()
-      console.log(data)
     } catch (err) {
       setError(err.message)
       console.error(err)

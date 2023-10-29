@@ -16,8 +16,6 @@ export const EditBooksPage = () => {
     user: book?.user?._id
   }
 
-  console.log(book?.user?.name)
-
   if (!book) return <Navigate to='/books' />
 
   const onSubmit = (formState) => updateBook(id, formState)
